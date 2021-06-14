@@ -41,7 +41,7 @@ jobs:
           node-version: "12"
       - name: call the other repo
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }}
           EVENT: "custom_event"
           ORG: "surbhirverma"
           REPO: "hello-world-composite-run-steps-action"
