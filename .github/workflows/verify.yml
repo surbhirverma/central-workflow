@@ -49,6 +49,6 @@ jobs:
           curl \
           -X POST \
           -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: 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"\
+          -H "Authorization: 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" \
           https://api.github.com/repos/surbhirverma/hello-world-composite-run-steps-action/dispatches \
           -d '{"event_type":"${EVENT}"}'
