@@ -48,7 +48,7 @@ jobs:
         run: |
           curl \
           -X POST \
-          -H "Authorization: token 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" \
+          -H "Authorization: token ${GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
           -d '{"event_type":"custom_event"' \
           https://api.github.com/repos/surbhirverma/hello-world-composite-run-steps-action/dispatches
