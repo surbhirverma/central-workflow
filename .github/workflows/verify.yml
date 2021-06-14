@@ -44,9 +44,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT: "custom_event"
           ORG: "surbhirverma"
-          REPO: "central-workflow"
+          REPO: "hello-world-composite-run-steps-action"
         run: |
           curl \
+          -u surbhirverma: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
           -X POST \
           -H "Authorization: token ${GITHUB_TOKEN}"\
           -H "Accept: application/vnd.github.v3+json" \
