@@ -50,5 +50,5 @@ jobs:
           -X POST \
           -H "Authorization: token ${GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type":"custom_event"' \
+          -d '{"event_type":"custom_event", "client_payload": {"foo": "bar"}}' \
           https://api.github.com/repos/surbhirverma/hello-world-composite-run-steps-action/dispatches
