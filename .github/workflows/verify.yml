@@ -33,7 +33,7 @@ jobs:
     runs-on:
       - ubuntu-latest
     env:
-      MY_GITHUB_REF: $ {{ github.ref }}
+      MY_GITHUB_REF: ${{ github.ref }}
     steps:
       - name: Check out repo
         uses: actions/checkout@master
