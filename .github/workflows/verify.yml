@@ -47,7 +47,7 @@ jobs:
           REPO: "hello-world-composite-run-steps-action"
         run: |
           curl \
-          --user "surbhirverma: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"
+          --user "surbhirverma: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" \
           -X POST \
           -H "Authorization: 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" \
           -H "Accept: application/vnd.github.v3+json" \
