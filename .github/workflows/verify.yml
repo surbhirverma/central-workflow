@@ -32,6 +32,8 @@ jobs:
     needs: check-labels
     runs-on:
       - ubuntu-latest
+     env:
+      MY_GITHUB_REF: $ {{ github.ref }}
     steps:
       - name: Check out repo
         uses: actions/checkout@master
@@ -41,7 +43,6 @@ jobs:
           node-version: "12"
       - name: call the other repo
         env:
-          MY_GITHUB_REF: $ {{ github.ref }}
           MY_GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }}
           EVENT: "custom_event"
           ORG: "surbhirverma"
@@ -51,5 +52,5 @@ jobs:
           -X POST \
           -H "Authorization: token ${MY_GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type":"custom_event", "client_payload": {"ref": \"${MY_GITHUB_REF}\"}}' \
+          -d '{"event_type":"custom_event", "client_payload": {"ref": '"$MY_GITHUB_REF"'}}' \
           https://api.github.com/repos/surbhirverma/repo-dispatch-example/dispatches
