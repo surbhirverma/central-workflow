@@ -41,14 +41,15 @@ jobs:
           node-version: "12"
       - name: call the other repo
         env:
-          GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }}
+          MY_GITHUB_REF: $ {{ github.ref }}
+          MY_GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }}
           EVENT: "custom_event"
           ORG: "surbhirverma"
           REPO: "hello-world-composite-run-steps-action"
         run: |
           curl \
           -X POST \
-          -H "Authorization: token ${GITHUB_TOKEN}" \
+          -H "Authorization: token ${MY_GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type":"custom_event", "client_payload": {"foo": "bar"}}' \
+          -d '{"event_type":"custom_event", "client_payload": {"ref": ${MY_GITHUB_REF}}}' \
           https://api.github.com/repos/surbhirverma/repo-dispatch-example/dispatches
