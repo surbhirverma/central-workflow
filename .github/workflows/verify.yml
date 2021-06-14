@@ -1,0 +1,54 @@
+name: Verify Mergeability
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+# runs only the latest workflow for a PR or source branch
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#concurrency (beta)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-labels:
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - uses: yashhy/pr-label-check-and-comment-action@master
+        with:
+          required_labels: >-
+            breaking, feature, build, chore, ci, docs, fix, perf, refactor,
+            revert, style, test, upgrade
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  check-code:
+    needs: check-labels
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@master
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+      - name: call the other repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT: "custom_event"
+          ORG: "surbhirverma"
+          REPO: "central-workflow"
+        run: |
+          curl \
+          -X POST \
+          -H "Authorization: token ${GITHUB_TOKEN}"\
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/surbhirverma/hello-world-composite-run-steps-action/dispatches \
+          -d '{"event_type":"${EVENT}"}'
