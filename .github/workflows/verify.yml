@@ -33,7 +33,7 @@ jobs:
     runs-on:
       - ubuntu-latest
     steps:
-=      - name: call external workflow to check code
+      - name: call external workflow to check code
         env:
           MY_GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }}
           EVENT: "custom_event"
