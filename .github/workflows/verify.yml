@@ -32,8 +32,6 @@ jobs:
     needs: check-labels
     runs-on:
       - ubuntu-latest
-    env:
-      MY_GITHUB_REF: ${{ github.ref }}
     steps:
       - name: Check out repo
         uses: actions/checkout@master
@@ -52,5 +50,5 @@ jobs:
           -X POST \
           -H "Authorization: token ${MY_GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type":"custom_event", "client_payload": {"ref":"'$MY_GITHUB_REF'"} }' \
+          -d '{"event_type":"custom_event", "client_payload": {"ref":"'$GITHUB_REF'", "repo": "'$GITHUB_REPOSITORY'"} }' \
           https://api.github.com/repos/surbhirverma/repo-dispatch-example/dispatches
