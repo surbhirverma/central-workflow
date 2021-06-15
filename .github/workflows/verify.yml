@@ -40,7 +40,7 @@ jobs:
           ORG: "surbhirverma"
           REPO: "central-workflow"
         run: |
-          curl --fail-early -sL -w ' { "statusCode": %{http_code}} \
+          curl --fail-early -sL -w '{ "statusCode": %{http_code}}' \
           -X POST \
           -H "Authorization: token ${MY_GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
