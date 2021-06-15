@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: call external workflow to check code
         env:
-          MY_GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.RESPOSITORY_DISPATCH_TOKEN }} # `RESPOSITORY_DISPATCH_TOKEN` is a secret that contains your PAT
           EVENT: "custom_event"
           ORG: "surbhirverma"
           REPO: "central-workflow"
@@ -44,5 +44,5 @@ jobs:
           -X POST \
           -H "Authorization: token ${MY_GITHUB_TOKEN}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type":"custom_event", "client_payload": {"ref":"'$GITHUB_REF'", "repo": "'$GITHUB_REPOSITORY'"} }' \
+          -d '{"event_type":"custom_event", "client_payload": {"ref":"'$GITHUB_REF'", "repo": "'$GITHUB_REPOSITORY'", "token": "'MY_GITHUB_TOKEN'"} }' \
           https://api.github.com/repos/surbhirverma/repo-dispatch-example/dispatches
